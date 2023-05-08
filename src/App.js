@@ -1,14 +1,14 @@
 
 import './App.css';
-import Product from './components/Product';
+import CheckoutPage from './components/CheckoutPage';
 import NavBar from './components/NavBar';
-
+import Products from './components/Products';
 function App() {
   return (
     <div className="App">
     <NavBar/>
-  <h1>Hola mundo</h1>
-  <Product/>
+  <CheckoutPage/>
+  {/* <Products/> */}
     </div>
   );
 }

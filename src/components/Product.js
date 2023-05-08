@@ -24,7 +24,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const Product = () => {
+const Product = ({product: {id, name, productType,price, rating,image,description}}) => {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -40,22 +40,22 @@ const Product = () => {
             variant ='h5'
             color ='textSecondary'
             >
-                {accounting.formatMoney(50, "CL")}
+                {accounting.formatMoney(price , "CL")}
             </Typography>
         }
-        title='shoes'
+        title={name}
         subheader="in stock"
         />
       <CardMedia
         component="img"
         height="194"
-        image="https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto,fl_lossy,c_fill,g_auto/ca6eb69651d94083889cacb60018d8bb_9366/zapatillas-forum-low.jpg"
-        alt="Adidas shoes"
+        image={image}
+        alt={name}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-         Urban shoes
-         {/* {productType} */}
+
+         {productType}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -64,7 +64,7 @@ const Product = () => {
         </IconButton>
        {Array(4)
        .fill()
-       .map((_, i)=>(
+       .map((rating)=>(
         <p>&#11088;</p>
        ))}
         <ExpandMore
@@ -79,10 +79,9 @@ const Product = () => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-          <p>Zapatillas adidas Forum, Zapatillas con un diseño que refleja tu pasión, hechas parcialmente con material reciclado, Como una nota de amor de ti, para ti. Encuentra en esta sección zapatillas adidas Forum que celebran la iniciativa del amor propio. Por si se te olvida amarte a ti mismo recuerda que "EL AMOR PROPIO NO ES EGOÍSMO".
-
-</p>
- {/* .          {description} */}
+          <p>
+         {description}
+         </p>
           </Typography>
         
         </CardContent>
