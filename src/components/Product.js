@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import accounting from 'accounting';
-
+import { useState } from 'react';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -34,10 +34,17 @@ const Product = ({product: {id, name, productType,price, rating,image,descriptio
 
 
 //funcion agregar al carrito
+const [cart, setCart]= useState(0);
 
 const addCart = () =>{
-alert("añadiste un producto")
+
+setCart(cart + 1);
+
+return(
+  alert(`usted a agregado ${cart} productos al carrito`)
+)
 }
+
 
   return (
     <Card sx={{ maxWidth: 345 }}>
