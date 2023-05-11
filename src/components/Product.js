@@ -31,6 +31,14 @@ const Product = ({product: {id, name, productType,price, rating,image,descriptio
     setExpanded(!expanded);
   };
 
+
+
+//funcion agregar al carrito
+
+const addCart = () =>{
+alert("añadiste un producto")
+}
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -60,7 +68,7 @@ const Product = ({product: {id, name, productType,price, rating,image,descriptio
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-        <AddShoppingCartIcon/>
+        <AddShoppingCartIcon onClick={addCart}/>
         </IconButton>
        {Array(4)
        .fill()

@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Badge } from '@mui/material';
+import { Link } from 'react-router-dom';
+import CheckoutPage from './CheckoutPage';
 
 const NavBar = ()=> {
   return (
@@ -29,13 +31,15 @@ const NavBar = ()=> {
          <Button variant ="elevated" color='primary' size="small">
             <h2 >Iniciar seccion</h2>
         </Button>
+  
         <IconButton>
         <Badge badgeContent={2} color="secondary">
         <ShoppingCartIcon fontSize="large" color="secondary"/>
+      
         </Badge>
-        
+       
        </IconButton>
-         
+  
          </div>
         </Toolbar>
       </AppBar>
