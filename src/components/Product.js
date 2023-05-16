@@ -11,7 +11,12 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import accounting from 'accounting';
-import { useState } from 'react';
+import { useStateValue } from '../StateProvider';
+import { actionTypes} from '../reducer';
+
+
+
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -26,7 +31,7 @@ const ExpandMore = styled((props) => {
 
 const Product = ({product: {id, name, productType,price, rating,image,description}}) => {
   const [expanded, setExpanded] = React.useState(false);
-
+  const [{cart},dispatch] = useStateValue()
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -34,15 +39,20 @@ const Product = ({product: {id, name, productType,price, rating,image,descriptio
 
 
 //funcion agregar al carrito
-const [cart, setCart]= useState(0);
 
-const addCart = () =>{
+const addToCart = () =>{
 
-setCart(cart + 1);
-
-return(
-  alert(`usted a agregado ${cart} productos al carrito`)
-)
+dispatch({
+  type: actionTypes.ADD_TO_CART,
+  item:{
+    id,
+    name,
+    productType,
+    image,
+    price,
+    description
+  }
+})
 }
 
 
@@ -75,7 +85,7 @@ return(
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-        <AddShoppingCartIcon onClick={addCart}/>
+        <AddShoppingCartIcon onClick={addToCart}/>
         </IconButton>
        {Array(4)
        .fill()

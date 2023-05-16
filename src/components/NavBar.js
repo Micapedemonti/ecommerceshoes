@@ -31,7 +31,6 @@ const NavBar = ()=> {
          <Button variant ="elevated" color='primary' size="small">
             <h2 >Iniciar seccion</h2>
         </Button>
-  
         <IconButton>
         <Badge badgeContent={2} color="secondary">
         <ShoppingCartIcon fontSize="large" color="secondary"/>
@@ -39,11 +38,14 @@ const NavBar = ()=> {
         </Badge>
        
        </IconButton>
-  
+     
+
          </div>
         </Toolbar>
       </AppBar>
+     
     </Box>
+    
   );
 }
 

@@ -1,25 +1,22 @@
 import { Typography } from "@mui/material"
-import { styled } from '@mui/material/styles'
-import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import products from "../product-data"
-import CheckoutCard from "./CheckoutCard";
 import { Fragment } from "react";
-import Product from "./Product";
+import { useStateValue } from "../StateProvider";
 import Total from "./Total";
+import CheckoutCard from "../components/CheckoutCard"
 
 const CheckoutPage = () =>{
-   
+    const [{cart},dispatch] = useStateValue()
+
 
 
 const FormRow  = () =>{
     return(
 <Fragment>
-        { products.map((item)=>(
+        {cart?.map((item)=>(
     <Grid item xs={12} sm={8} md={6} lg={4}>
-        {/* <CheckoutCard key = {item.id} product= {item}/> */}
-        <CheckoutCard key = {item.id} product= {item}/>
+        <CheckoutCard key={item.id} product={item}/>
     </Grid>
         ))}
  </Fragment>

@@ -1,21 +1,21 @@
-// export const initialState = {
-//     carrito : []
-// }
+export const initialState = {
+    cart: []
+}
 
-// export const actionTypes = {
-//     ADD_TO_CARRITO: "ADD_TO_CARRITO"
-// }
+export const actionTypes = {
+    ADD_TO_CART: "ADD_TO_CART"
+}
 
-// const reducer = (state,action) =>{
-//     console.log (action);
-//     switch (action.type){
-//         case "ADD_TO_CARRITO":
-//             return {
-//                 ...state,
-//                 carrito:[...state.carrito,action.item]
-//             };
-//     default: return state
-//     }
+const reducer = (state,action) =>{
+    console.log (action);
+    switch (action.type){
+        case "ADD_TO_CART":
+            return {
+                ...state,
+                cart:[...state.cart,action.item]
+            };
+    default: return state
+    }
 
-// }
-// export default reducer 
+}
+export default reducer 
