@@ -1,4 +1,4 @@
-const products = [
+const productData = [
     {
         id: 1,
         name: "Zapatillas Adidas",
@@ -39,4 +39,4 @@ const products = [
 
 ]
 
-export default products
+export default productData

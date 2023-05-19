@@ -13,8 +13,9 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import accounting from 'accounting';
 import { useStateValue } from '../StateProvider';
 import { actionTypes} from '../reducer';
-
-
+import { CartContext } from './contexts/CartContext';
+import { useContext } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete'
 
 
 
@@ -31,7 +32,7 @@ const ExpandMore = styled((props) => {
 
 const Product = ({product: {id, name, productType,price, rating,image,description}}) => {
   const [expanded, setExpanded] = React.useState(false);
-  const [{cart},dispatch] = useStateValue()
+ 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -40,24 +41,52 @@ const Product = ({product: {id, name, productType,price, rating,image,descriptio
 
 //funcion agregar al carrito
 
-const addToCart = () =>{
+const [cart,setCart]= useContext (CartContext)
 
-dispatch({
-  type: actionTypes.ADD_TO_CART,
-  item:{
-    id,
-    name,
-    productType,
-    image,
-    price,
-    description
-  }
-})
+  const addToCart =() =>{
+    setCart((currItems)=>{
+      const isItemsFound = currItems.find((item)=> item.id === id);
+      if(isItemsFound){
+        return currItems.map((item)=>{
+          if(item.id=== id){
+            return {...item, quantity: item.quantity + 1 } 
+          } else {
+              return item;
+            }
+          
+        });
+      }else{
+        return [...currItems, { id,quantity:1,price}]
+      }
+    }
+  )
 }
+
+const removeItem = (id) =>{
+  setCart((currItems)=>{
+      if(currItems.find((item) =>item.id === id)?.quantity=== 1){
+        return currItems.filter((item)=> item.id !== id);
+      } else {
+        return currItems.map((item)=>{
+          if(item.id === id ){
+            return {...item, quantity:item.quantity - 1}
+          } else{
+            return item;
+          }
+        })
+      }
+  }) 
+};
+
+const getQuantityById = (id)=>{
+return  cart.find((item)=> item.id === id)?.quantity || 0 ;
+} 
+const quantityPerItem = getQuantityById(id)
 
 
   return (
     <Card sx={{ maxWidth: 345 }}>
+  
       <CardHeader
         action={
             <Typography 
@@ -76,7 +105,11 @@ dispatch({
         height="194"
         image={image}
         alt={name}
+        
       />
+        {quantityPerItem > 0 && (
+      <div>{quantityPerItem}</div>
+    )}
       <CardContent>
         <Typography variant="body2" color="text.secondary">
 
@@ -84,9 +117,34 @@ dispatch({
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-        <AddShoppingCartIcon onClick={addToCart}/>
+   
+
+      {quantityPerItem === 0 ? (
+        <IconButton aria-label="add to favorites" onClick={addToCart}>
+          <AddShoppingCartIcon/>
         </IconButton>
+
+      ):
+      (
+        
+        <IconButton aria-label="add to favorites" onClick={addToCart}>
+          <AddShoppingCartIcon/>
+        </IconButton>
+      )}
+
+
+      {quantityPerItem > 0 && (
+        <IconButton aria-label="add to favorites" onClick={()=>removeItem(id)}>
+              <DeleteIcon/>
+        </IconButton>
+       
+      )}
+        {/* <IconButton aria-label="add to favorites">
+     
+
+        </IconButton> */}
+   
+        
        {Array(4)
        .fill()
        .map((rating)=>(

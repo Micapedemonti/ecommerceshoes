@@ -9,12 +9,24 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Badge } from '@mui/material';
 import { Link } from 'react-router-dom';
 import CheckoutPage from './CheckoutPage';
+import { CartContext } from './contexts/CartContext';
 
 const NavBar = ()=> {
+
+ 
+  const [cart,setCart] = React.useContext(CartContext)
+
+
+
+  const quantity = cart.reduce((acc, curr)=>{
+      return acc + curr.quantity;
+  },0)
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
         <Toolbar>
+       
           <IconButton
             size="large"
             edge="start"
@@ -22,8 +34,12 @@ const NavBar = ()=> {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <h1>MENU SHOES</h1>
-          </IconButton>
+                      <p>MENU SHOES</p>
+                </IconButton>
+
+
+    
+
           <Typography variant="h6" component="p" color="textPrimary" sx={{ flexGrow: 1 }}>
             Hola Invitado
           </Typography>
@@ -32,9 +48,9 @@ const NavBar = ()=> {
             <h2 >Iniciar seccion</h2>
         </Button>
         <IconButton>
-        <Badge badgeContent={2} color="secondary">
+        <Badge color="secondary">
         <ShoppingCartIcon fontSize="large" color="secondary"/>
-      
+               {quantity}
         </Badge>
        
        </IconButton>

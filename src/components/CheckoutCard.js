@@ -7,47 +7,30 @@ import Typography from '@mui/material/Typography';
 import accounting from 'accounting';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const CheckoutCard = ({product:{ id, name, price, description,image, productType}}) =>{
+const CheckoutCard = ({ item: { id, name, price, description, image, productType }, removeItem }) => {
+  const handleRemoveItem = () => {
+    removeItem(id);
+  };
 
-    const ExpandMore = styled((props) => {
-        const { expand, ...other } = props;
-        return <IconButton {...other} />;
-      })(({ theme, expand }) => ({
-        transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-          duration: theme.transitions.duration.shortest,
-        }),
-      }));
-
-
-    return (
-        <div>
-        <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        action={
-            <Typography 
-            // className={classes.action}
-            variant ='h5'
-            color ='textSecondary'
-            >
-                {accounting.formatMoney(price , "CL")}
+  return (
+    <div>
+      <Card sx={{ maxWidth: 345 }} key={id}>
+        <CardHeader
+          action={
+            <Typography variant="h5" color="textSecondary">
+              {accounting.formatMoney(price, "CL")}
             </Typography>
-        }
-        title={name}
-        subheader="in stock"
+          }
+          title={name}
+          subheader="in stock"
         />
-      <CardMedia
-        component="img"
-        height="194"
-        image={image}
-        alt={name}
-      />
-   
-     <IconButton>  <DeleteIcon fontSize='large'/></IconButton>
-    </Card>
-        </div>
-    )
-}
+        <CardMedia key={id} component="img" height="194" image={image} alt={name} description={description} />
+        <IconButton onClick={handleRemoveItem}>
+          <DeleteIcon fontSize="large" />
+        </IconButton>
+      </Card>
+    </div>
+  );
+};
 
-export default CheckoutCard
+export default CheckoutCard;
