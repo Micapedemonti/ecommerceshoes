@@ -11,12 +11,10 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import accounting from 'accounting';
-import { useStateValue } from '../StateProvider';
-import { actionTypes} from '../reducer';
 import { CartContext } from './contexts/CartContext';
 import { useContext } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete'
-
+import { Link } from 'react-router-dom';
 
 
 const ExpandMore = styled((props) => {
@@ -45,18 +43,18 @@ const [cart,setCart]= useContext (CartContext)
 
   const addToCart =() =>{
     setCart((currItems)=>{
-      const isItemsFound = currItems.find((item)=> item.id === id);
+      const isItemsFound = currItems.find((product)=> product.id === id);
       if(isItemsFound){
-        return currItems.map((item)=>{
-          if(item.id=== id){
-            return {...item, quantity: item.quantity + 1 } 
+        return currItems.map((product)=>{
+          if(product.id === id){
+            return {...product, quantity:product.quantity + 1 } 
           } else {
-              return item;
+              return product;
             }
           
         });
       }else{
-        return [...currItems, { id,quantity:1,price}]
+        return [...currItems, { id,quantity:1,price,image,description,name}]
       }
     }
   )
@@ -64,7 +62,7 @@ const [cart,setCart]= useContext (CartContext)
 
 const removeItem = (id) =>{
   setCart((currItems)=>{
-      if(currItems.find((item) =>item.id === id)?.quantity=== 1){
+      if(currItems.find((item) =>item.id === id)?.quantity === 0){
         return currItems.filter((item)=> item.id !== id);
       } else {
         return currItems.map((item)=>{
@@ -97,7 +95,7 @@ const quantityPerItem = getQuantityById(id)
                 {accounting.formatMoney(price , "CL")}
             </Typography>
         }
-        title={name}
+      
         subheader="in stock"
         />
       <CardMedia
@@ -136,7 +134,10 @@ const quantityPerItem = getQuantityById(id)
       {quantityPerItem > 0 && (
         <IconButton aria-label="add to favorites" onClick={()=>removeItem(id)}>
               <DeleteIcon/>
+              <Link to ="/checkout-page">Ir al carrito</Link>
         </IconButton>
+
+        
        
       )}
         {/* <IconButton aria-label="add to favorites">

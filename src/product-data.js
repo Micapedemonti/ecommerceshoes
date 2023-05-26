@@ -3,7 +3,7 @@ const productData = [
         id: 1,
         name: "Zapatillas Adidas",
         productType: "Zapatillas urbanas",
-        price: 99.990,
+        price: 99.9900,
         rating: 4,
         image:"https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto,fl_lossy,c_fill,g_auto/ca6eb69651d94083889cacb60018d8bb_9366/zapatillas-forum-low.jpg",
         description:"Zapatillas con un diseño que refleja tu pasión, hechas parcialmente con material reciclado, Como una nota de amor de ti, para ti. Encuentra en esta sección zapatillas adidas Forum que celebran la iniciativa del amor propio. Por si se te olvida amarte a ti mismo recuerda que EL AMOR PROPIO NO ES EGOÍSMO"

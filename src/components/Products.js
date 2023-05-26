@@ -1,11 +1,8 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Product from './Product';
 import products from '../product-data';
-import { Typography } from '@mui/material';
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -17,7 +14,7 @@ import { Typography } from '@mui/material';
 
 const  Products = () => {
   return (
-    <Box sx={{ flexGrow: 1}}>
+    <Box sx={{ flexGrow: 1}} className="products_container">
       <Grid container spacing={3}>
        {
         products.map(product=>(

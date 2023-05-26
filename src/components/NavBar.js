@@ -7,14 +7,12 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Badge } from '@mui/material';
-import { Link } from 'react-router-dom';
-import CheckoutPage from './CheckoutPage';
 import { CartContext } from './contexts/CartContext';
 
 const NavBar = ()=> {
 
  
-  const [cart,setCart] = React.useContext(CartContext)
+  const [cart] = React.useContext(CartContext)
 
 
 

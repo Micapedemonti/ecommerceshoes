@@ -1,75 +1,57 @@
-// import { Typography } from "@mui/material";
-// import Box from "@mui/material/Box";
-// import Grid from "@mui/material/Grid";
-// import { useContext } from "react";
-// import { CartContext } from "./contexts/CartContext";
-// import CheckoutCard from "./CheckoutCard";
 
-// const CheckoutPage = () => {
-//   const [cart] = useContext(CartContext);
-
-//   return (
-//     <Box sx={{ flexGrow: 1 }}>
-//       <Grid container spacing={2}>
-//         <Grid item xs={12} sm={8} md={6}>
-//           <Typography align="center" gutterBottom variant="h4">
-//             Shopping Cart
-//           </Typography>
-//           {cart.length > 0 ? (
-//             cart.map((item) => (
-//               <CheckoutCard key={item.id} item={item} />
-//             ))
-//           ) : (
-//             <Typography align="center" variant="body1">
-//               No items in the cart.
-//             </Typography>
-//           )}
-//         </Grid>
-//       </Grid>
-//     </Box>
-//   );
-// };
-
-// export default CheckoutPage;
-
-
-import { Typography } from "@mui/material";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import { useContext } from "react";
 import { CartContext } from "./contexts/CartContext";
 import CheckoutCard from "./CheckoutCard";
+import './checkoutPage.css'
+import accounting from "accounting";
 
 const CheckoutPage = () => {
-  const [cart, setCart] = useContext(CartContext);
+ 
+  const [cart] =useContext(CartContext)
 
-  const removeItem = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
-  };
 
+
+  const quantity = cart.reduce((acc, curr)=>{
+      return acc + curr.quantity;
+  },0)
+
+const totalPrice = cart.reduce((acc,curr)=>{
+    return acc + curr.quantity * curr.price;
+},0)
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={8} md={6}>
-          <Typography align="center" gutterBottom variant="h4">
-            Shopping Cart
-          </Typography>
+    <>
+    <div>
+
+        <div className="container_checkoutPage">
+        
           {cart.length > 0 ? (
-            cart.map((item) => (
-              <CheckoutCard
-                key={item.id}
-                item={item}
-                removeItem={removeItem}
-              />
-            ))
-          ) : (
-            <Typography align="center" variant="body1">
-              No items in the cart.
-            </Typography>
-          )}
-        </Grid>
-      </Grid>
-    </Box>
+            cart.map((product) => (
+               <CheckoutCard key={product.id} item={product} quantity ={quantity} /> 
+               )  )  
+           ) : (
+            <h1> No hay productos en el carrito</h1>
+          )}  
+          <div>
+          <h1> Productos en el carrito:{quantity}</h1>
+          <h1> Total: {accounting.formatMoney(totalPrice, "CL")} </h1>
+          </div>
+         </div>
+          {/* <div>
+         
+      {quantity <  0 ? (
+       <h1> Total:{totalPrice} </h1>
+    
+      ):( <h1>{totalPrice}</h1> ) } 
+
+
+  
+
+            <button onClick={()=>console.log(cart)}>Checkout</button> 
+      </div> */}
+  
+  
+ </div>
+ </>
   );
 };
 
